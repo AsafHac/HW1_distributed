@@ -8,15 +8,18 @@ public class Manager {
     private static final String TASK_QUEUE_URL = "your-task-queue-url";
     private static final String RESULT_QUEUE_URL = "your-result-queue-url";
     private static final String WORKER_QUEUE_URL = "your-worker-queue-url";
+    private static boolean shouldTerminate;
 
     private final AWS aws;
 
     public Manager() {
-        this.aws = new AWS();
+        this.aws = AWS.getInstance();
+        this.shouldTerminate=false;
+        
     }
 
     public void run() {
-        while (true) {
+        while (!shouldTerminate) {
             List<Message> taskMessages = aws.receiveMessages(TASK_QUEUE_URL, 10);
 
             for (Message taskMessage : taskMessages) {
@@ -33,14 +36,14 @@ public class Manager {
             }
         }
     }
+    public void terminate(){
+        this.shouldTerminate=true;
+    }
 
     private void terminateWorkers() {
         aws.sendMessageToQueue(WORKER_QUEUE_URL, "terminate");
     }
 
-    public static void main(String[] args) {
-        Manager manager = new Manager();
-        manager.run();
-    }
+    
 }
 

@@ -14,7 +14,7 @@ public class LocalApplication {
     private final AWS aws;
 
     public LocalApplication() {
-        this.aws = new AWS();
+        this.aws = AWS.getInstance();
     }
 
     public void run(String inputFileName, String outputFileName, int n, boolean terminate) throws IOException {

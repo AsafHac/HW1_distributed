@@ -1,18 +1,21 @@
 -------------------------------------------------------------------------------
 Test set: may.PDFProcessorTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 1.065 s <<< FAILURE! -- in may.PDFProcessorTest
-may.PDFProcessorTest.testToImageConversion -- Time elapsed: 0.706 s <<< FAILURE!
-org.opentest4j.AssertionFailedError: Should not throw exception: Error: End-of-File, expected line
-	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
-	at org.junit.jupiter.api.Assertions.fail(Assertions.java:138)
-	at may.PDFProcessorTest.testToImageConversion(PDFProcessorTest.java:37)
+Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 7.437 s <<< FAILURE! -- in may.PDFProcessorTest
+may.PDFProcessorTest.testToImageConversion -- Time elapsed: 3.780 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Image output file should exist ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at may.PDFProcessorTest.testToImageConversion(PDFProcessorTest.java:30)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-may.PDFProcessorTest.testToTextConversion -- Time elapsed: 0.160 s <<< FAILURE!
-org.opentest4j.AssertionFailedError: Should not throw exception: Error: End-of-File, expected line
+may.PDFProcessorTest.testToTextConversion -- Time elapsed: 2.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Should not throw exception: Input length = 1
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
 	at org.junit.jupiter.api.Assertions.fail(Assertions.java:138)
 	at may.PDFProcessorTest.testToTextConversion(PDFProcessorTest.java:81)
@@ -20,8 +23,8 @@ org.opentest4j.AssertionFailedError: Should not throw exception: Error: End-of-F
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-may.PDFProcessorTest.testToHTMLConversion -- Time elapsed: 0.160 s <<< FAILURE!
-org.opentest4j.AssertionFailedError: Should not throw exception: Error: End-of-File, expected line
+may.PDFProcessorTest.testToHTMLConversion -- Time elapsed: 1.602 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Should not throw exception: Input length = 1
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
 	at org.junit.jupiter.api.Assertions.fail(Assertions.java:138)
 	at may.PDFProcessorTest.testToHTMLConversion(PDFProcessorTest.java:59)

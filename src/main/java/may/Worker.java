@@ -6,35 +6,42 @@ import java.util.List;
 
 public class Worker {
 
-    private static final String WORKER_QUEUE_URL = "your-worker-queue-url";
-    private static final String RESULT_QUEUE_URL = "your-result-queue-url";
+    private String SQS_URL = "your-worker-queue-url";
+   
 
     private final AWS aws;
+    private boolean shouldTerminate;
 
-    public Worker() {
-        this.aws = new AWS();
+    public Worker(String SQS_URL) {
+        this.SQS_URL=SQS_URL;
+        this.aws = AWS.getInstance();
+        this.shouldTerminate=false;
     }
 
     public void run() {
-        while (true) {
-            List<Message> workerMessages = aws.receiveMessages(WORKER_QUEUE_URL, 10);
+        while (!shouldTerminate) {
+            String massage=this.aws.receiveMessageFromQueue(SQS_URL);
+            if(message)
 
-            for (Message workerMessage : workerMessages) {
-                String taskBody = workerMessage.body();
+            for (String wm : workerMessages) {
+                
 
                 if ("terminate".equalsIgnoreCase(taskBody.trim())) {
-                    aws.deleteMessageFromQueue(WORKER_QUEUE_URL, workerMessage.receiptHandle());
+                    aws.deleteMessageFromQueue(SQS_URL, workerMessage.receiptHandle());
                     return;
                 }
 
                 try {
                     processTask(taskBody);
-                    aws.deleteMessageFromQueue(WORKER_QUEUE_URL, workerMessage.receiptHandle());
+                    aws.deleteMessageFromQueue(SQS_URL, workerMessage.receiptHandle());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+    public void terminate(){
+        this.shouldTerminate=true;
     }
 
     private void processTask(String task) throws IOException {
@@ -48,12 +55,21 @@ public class Worker {
         String pdfUrl = parts[1];
 
         PDFProcessor.processPDF(command, pdfUrl);
-        aws.sendMessageToQueue(RESULT_QUEUE_URL, "Processed: " + task);
+        aws.sendMessageToQueue(SQS_URL, "Processed: " + task);
     }
-
     public static void main(String[] args) {
-        Worker worker = new Worker();
+        if (args.length != 2) {
+            System.err.println("Usage: Worker <sqs-url> <split-size>");
+            System.exit(1);
+        }
+
+        String sqsUrl = args[0];
+        int splitSize = Integer.parseInt(args[1]);
+
+        Worker worker = new Worker(sqsUrl);
         worker.run();
     }
+
+    
 }
 

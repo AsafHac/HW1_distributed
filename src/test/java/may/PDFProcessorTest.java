@@ -12,7 +12,7 @@ import java.nio.file.Path;
 
 public class PDFProcessorTest {
     
-    private static final String TEST_PDF_URL = "http://www.barrylou.com/books/TellingTheStoryInside.pdf";
+    private static final String TEST_PDF_URL = "http://avirtualpassover.com/pdf/introduction.pdf";
     
     @BeforeAll
     static void setUp() {
@@ -26,7 +26,7 @@ public class PDFProcessorTest {
             PDFProcessor.processPDF("ToImage", TEST_PDF_URL);
             
             // Check if the output file exists
-            File outputFile = new File(System.getProperty("user.dir") , "output.png");
+            File outputFile = new File("", "output.png");
             assertTrue(outputFile.exists(), "Image output file should exist");
             assertTrue(outputFile.length() > 0, "Image file should not be empty");
             

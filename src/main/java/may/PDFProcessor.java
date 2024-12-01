@@ -6,6 +6,8 @@ import org.apache.pdfbox.text.PDFTextStripper;
 
 import java.io.*;
 import java.net.URL;
+import java.net.URLConnection;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
@@ -59,6 +61,10 @@ public class PDFProcessor {
      */
     private static File downloadPDF(String pdfUrl) throws IOException {
         File tempFile = File.createTempFile("pdf", ".pdf");
+         URLConnection connection = new URL(pdfUrl).openConnection();
+        connection.setConnectTimeout(5000);
+        connection.setReadTimeout(5000);
+        
         try (InputStream in = new URL(pdfUrl).openStream();
              FileOutputStream out = new FileOutputStream(tempFile)) {
             byte[] buffer = new byte[1024];
