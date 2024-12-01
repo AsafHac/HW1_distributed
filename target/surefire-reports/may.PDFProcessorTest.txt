@@ -1,0 +1,31 @@
+-------------------------------------------------------------------------------
+Test set: may.PDFProcessorTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 1.065 s <<< FAILURE! -- in may.PDFProcessorTest
+may.PDFProcessorTest.testToImageConversion -- Time elapsed: 0.706 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Should not throw exception: Error: End-of-File, expected line
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:138)
+	at may.PDFProcessorTest.testToImageConversion(PDFProcessorTest.java:37)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+may.PDFProcessorTest.testToTextConversion -- Time elapsed: 0.160 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Should not throw exception: Error: End-of-File, expected line
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:138)
+	at may.PDFProcessorTest.testToTextConversion(PDFProcessorTest.java:81)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+may.PDFProcessorTest.testToHTMLConversion -- Time elapsed: 0.160 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Should not throw exception: Error: End-of-File, expected line
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:138)
+	at may.PDFProcessorTest.testToHTMLConversion(PDFProcessorTest.java:59)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
