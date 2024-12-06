@@ -1,5 +1,4 @@
 package may;
-
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ec2.Ec2Client;
 import software.amazon.awssdk.services.ec2.model.*;
@@ -12,17 +11,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Base64;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
 
 public class AWS {
     private final S3Client s3;
-    private final SqsClient sqs;
-    private final Ec2Client ec2;
+    protected final SqsClient sqs;
+    protected final Ec2Client ec2;
     private final Region region = Region.US_WEST_2; // Replace with your preferred region
     private static AWS instance = null;
-    private boolean isManagerRunning;
 
     private AWS() {
         this.s3 = S3Client.builder().region(region).build();
@@ -148,7 +143,7 @@ public class AWS {
             RunInstancesResponse response = ec2.runInstances(RunInstancesRequest.builder()
                     .imageId(amiId)
                     .instanceType(InstanceType.fromValue(instanceType))
-                    .maxCount(3)
+                    .maxCount(1)
                     .minCount(1)
                     .userData(Base64.getEncoder().encodeToString(script.getBytes()))
                     .build());
@@ -171,20 +166,4 @@ public class AWS {
             System.err.println("Error terminating EC2 instance: " + e.getMessage());
         }
     }
-
-    public List<String> receiveMessages(String SQS_URL, int i) {
-        try {
-            List<String> answer= new LinkedList<String>(); 
-            for(int j=1;j<=i;j++){
-                answer.add(receiveMessageFromQueue(SQS_URL));
-
-            }
-            return answer;
-
-        }catch (SqsException e) {
-            System.err.println("Error receiving message: " + e.getMessage());
-        }
-        throw new java.lang.UnsupportedOperationException("Unimplemented method 'receiveMessages'");
-    }
-    
 }
